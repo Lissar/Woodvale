@@ -1,0 +1,21 @@
+﻿
+
+@{
+    ViewBag.Title = "News";
+}
+
+<p>
+            
+    @foreach (MVCLab2.Models.NewsList item in (ViewBag.News as IEnumerable<MVCLab2.Models.NewsList>))
+    {
+    <p>
+        <h3><b>@item.Title</b></h3>
+    </p>
+    <p>
+        <h5><i>@item.Date</i></h5>
+    </p>
+    <p>
+        @item.Story
+    </p>
+    }
+</p>

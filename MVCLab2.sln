@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2ED46E29-1497-4348-81BE-CCE9C102611A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D2FDDBA-9A87-46F7-8552-8172CF3B28FC}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MVCLab2", "src\MVCLab2\MVCLab2.xproj", "{9C0CC7C4-66D5-46F3-A381-A54CDE0BBD6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F10CF0A1-AB7A-4272-8703-937422AD36CA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MVCLab2.Tests", "tests\MVCLab2.Tests\MVCLab2.Tests.xproj", "{14E5C457-C468-4742-A960-4D484C40DC94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C0CC7C4-66D5-46F3-A381-A54CDE0BBD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0CC7C4-66D5-46F3-A381-A54CDE0BBD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0CC7C4-66D5-46F3-A381-A54CDE0BBD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0CC7C4-66D5-46F3-A381-A54CDE0BBD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E5C457-C468-4742-A960-4D484C40DC94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E5C457-C468-4742-A960-4D484C40DC94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E5C457-C468-4742-A960-4D484C40DC94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E5C457-C468-4742-A960-4D484C40DC94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C0CC7C4-66D5-46F3-A381-A54CDE0BBD6E} = {2ED46E29-1497-4348-81BE-CCE9C102611A}
+		{14E5C457-C468-4742-A960-4D484C40DC94} = {F10CF0A1-AB7A-4272-8703-937422AD36CA}
+	EndGlobalSection
+EndGlobal
