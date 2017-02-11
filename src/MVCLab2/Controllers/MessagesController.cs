@@ -20,9 +20,9 @@ namespace MVCLab2.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public ViewResult Index()
         {
-            return View();
+            return View(messageRepo.GetMessages().ToList());
         }
 
         public ViewResult Messages()
