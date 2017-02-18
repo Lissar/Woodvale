@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MVCLab2.Models.Repositories
 {
     public interface IMessageRepository
     {
-        IEnumerable<Message> Messages { get; }
-
-        List<Message> GetMessages();
+        IEnumerable<Message> GetAllMessages();
     }
 }

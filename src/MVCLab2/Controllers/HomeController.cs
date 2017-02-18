@@ -38,9 +38,7 @@ namespace MVCLab2.Controllers
 
         public ViewResult Members()
         {
-            var repo = new MemberRepository();
-            var members = repo.GetMembers();
-            return View(members);
+            return View(memberRepo.GetAllMembers().ToList());
         }
     }
 }

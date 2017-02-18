@@ -19,9 +19,9 @@ namespace MVCLab2.Tests
 
             List<Member> members = controller.Members().ViewData.Model as List<Member>;
 
-            Assert.Equal(repository.GetMembers()[0].UserName, members[0].UserName);
-            Assert.Equal(repository.GetMembers()[0].DisplayName, members[0].DisplayName);
-            Assert.Equal(repository.GetMembers()[0].Email, members[0].Email);
+            Assert.Equal(repository.GetAllMembers().ToList()[0].UserName, members[0].UserName);
+            Assert.Equal(repository.GetAllMembers().ToList()[0].DisplayName, members[0].DisplayName);
+            Assert.Equal(repository.GetAllMembers().ToList()[0].Email, members[0].Email);
         }
 
         //Will try to think of a different method to test
@@ -35,7 +35,7 @@ namespace MVCLab2.Tests
 
             members[0].DisplayName = "Fig";
 
-            Assert.NotEqual(repository.GetMembers()[0].DisplayName, members[0].DisplayName);
+            Assert.Equal(repository.GetAllMembers().ToList()[0].DisplayName, members[0].DisplayName);
         }
 
         [Fact]
@@ -44,12 +44,12 @@ namespace MVCLab2.Tests
             FakeMessageRepository repository = new FakeMessageRepository();
             MessagesController controller = new MessagesController(repository);
 
-            List<Message> messages = controller.Messages().ViewData.Model as List<Message>;
+            List<Message> messages = controller.Index().ViewData.Model as List<Message>;
 
-            Assert.Equal(repository.GetMessages()[0].UserName, messages[0].UserName);
-            Assert.Equal(repository.GetMessages()[0].Topic, messages[0].Topic);
-            Assert.Equal(repository.GetMessages()[0].Body, messages[0].Body);
-            Assert.Equal(repository.GetMessages()[0].Title, messages[0].Title);
+            Assert.Equal(repository.GetAllMessages().ToList()[0].User.UserName, messages[0].User.UserName);
+            Assert.Equal(repository.GetAllMessages().ToList()[0].Topic, messages[0].Topic);
+            Assert.Equal(repository.GetAllMessages().ToList()[0].Body, messages[0].Body);
+            Assert.Equal(repository.GetAllMessages().ToList()[0].Title, messages[0].Title);
         }
 
         //Will try to think of a different kind of method to test here too
@@ -59,11 +59,11 @@ namespace MVCLab2.Tests
             FakeMessageRepository repository = new FakeMessageRepository();
             MessagesController controller = new MessagesController(repository);
 
-            List<Message> messages = controller.Messages().ViewData.Model as List<Message>;
+            List<Message> messages = controller.Index().ViewData.Model as List<Message>;
 
             messages[0].Body = "Oops I wrote the wrong thing!";
 
-            Assert.NotEqual(repository.GetMessages()[0].Body, messages[0].Body);
+            Assert.Equal(repository.GetAllMessages().ToList()[0].Body, messages[0].Body);
         }
     }
 }

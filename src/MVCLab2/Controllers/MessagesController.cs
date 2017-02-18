@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MVCLab2.Models.Repositories;
 
@@ -22,16 +19,7 @@ namespace MVCLab2.Controllers
         // GET: /<controller>/
         public ViewResult Index()
         {
-            return View(messageRepo.GetMessages().ToList());
-        }
-
-        public ViewResult Messages()
-        {
-            var repo = new MessageRepository();
-            var messages = repo.GetMessages();
-            return View(messages);
-        }
-
-        
+            return View(messageRepo.GetAllMessages().ToList());
+        }        
     }
 }

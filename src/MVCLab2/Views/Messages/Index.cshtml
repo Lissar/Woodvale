@@ -6,11 +6,11 @@
 <p>
     @foreach (var m in Model)
     {
-         @:<p>From: @m.UserName <br />
-         @:Title: @m.Title <br />
-         @:Date: @m.Date<br />
-        @:Topic: @m.Title <br />
+        @:<p>From: @m.User.UserName <br />
+        @:Title: @m.Title <br />
+        @:Date: @m.Date<br />
+        @:Topic: @m.Topic <br />
         @: <h5>@m.Body</h5></p> <br />
-        }
+    }
     <br />
 </p>
