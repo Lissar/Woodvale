@@ -13,4 +13,13 @@
         @: <h5>@m.Body</h5></p> <br />
     }
     <br />
+
+@Html.ActionLink("Show boredom messages", "MessagesByTopic", "Messages",
+    new { topic = "Boredom" })<br />
+@Html.ActionLink("Show introduction messages", "MessagesByTopic", "Messages",
+    new { topic = "Introduction" })<br />
+@Html.ActionLink("Show member1 messages", "MessagesByMember", "Messages",
+    new { member = "member1" })<br />
+@Html.ActionLink("Show member2 messages", "MessagesByMember", "Messages",
+    new { member = "member2" })<br />
 </p>

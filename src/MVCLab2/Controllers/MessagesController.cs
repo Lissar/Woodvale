@@ -20,6 +20,20 @@ namespace MVCLab2.Controllers
         public ViewResult Index()
         {
             return View(messageRepo.GetAllMessages().ToList());
-        }        
+        }
+
+        public ViewResult MessagesByTopic(string topic)
+        {
+            ViewBag.Topic = topic;
+            return View("Index", messageRepo.GetAllMessages().
+                Where(m => m.Topic == topic).ToList());
+        }
+
+        public ViewResult MessagesByMember(string member)
+        {
+            ViewBag.Member = member;
+            return View("Index", messageRepo.GetAllMessages().
+                Where(m => m.User.UserName == member).ToList());
+        }
     }
 }
