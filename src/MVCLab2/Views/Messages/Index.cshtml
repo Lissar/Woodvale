@@ -6,14 +6,23 @@
 <p>
     @foreach (var m in Model)
     {
-        @:<p>From: @m.User.UserName <br />
+        @:From: @m.User.UserName <br />
         @:Title: @m.Title <br />
         @:Date: @m.Date<br />
         @:Topic: @m.Topic <br />
-        @: <h5>@m.Body</h5></p> <br />
+        @:@m.Body<br />
+
+        @Html.ActionLink("Reply", "ReplyToMessage", "Messages", new { Id = m.MessageID })<br />
+
+        @foreach (var r in m.MessageReplies)
+        {
+            @: <i>@r.Body</i><br />
+        }
+        <br />
     }
     <br />
 
+@Html.ActionLink("Add Message", "AddNewMessage", "Messages")<br />
 @Html.ActionLink("Show boredom messages", "MessagesByTopic", "Messages",
     new { topic = "Boredom" })<br />
 @Html.ActionLink("Show introduction messages", "MessagesByTopic", "Messages",

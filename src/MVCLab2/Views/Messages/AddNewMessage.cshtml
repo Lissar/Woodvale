@@ -1,0 +1,24 @@
+﻿﻿@model MVCLab2.Models.Message
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewBag.Title = "Add a new message";
+}
+
+<h1>Write your message!</h1>
+
+<form asp-controller="Messages" asp-action="AddNewMessage" method="post">
+
+    <input asp-for="MessageID" type="hidden" />
+
+    <label asp-for="Title"></label>
+    <input asp-for="Title" />
+
+    <label asp-for="Topic"></label>
+    <input asp-for="Topic" />
+
+    <label asp-for="Body"></label>
+    <input asp-for="Body" />
+
+    <button type="submit">Post</button>
+</form>

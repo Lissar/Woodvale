@@ -5,5 +5,6 @@ namespace MVCLab2.Models.Repositories
     public interface IMessageRepository
     {
         IEnumerable<Message> GetAllMessages();
-    }
+        int Update(Message message);
+    }    
 }

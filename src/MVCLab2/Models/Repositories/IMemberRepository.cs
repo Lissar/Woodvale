@@ -5,5 +5,6 @@ namespace MVCLab2.Models.Repositories
     public interface IMemberRepository
     {
         IEnumerable<Member> GetAllMembers();
+        Member GetMemberByUserName(string username);
     }
 }

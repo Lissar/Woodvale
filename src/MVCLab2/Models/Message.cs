@@ -13,5 +13,7 @@ namespace MVCLab2.Models
         public DateTime Date { get; set; }
         public Member User { get; set; }
         public string Topic { get; set; }
+        private List<Reply> replies = new List<Reply>();
+        public List<Reply> MessageReplies { get { return replies; } }
     }
 }
