@@ -63,7 +63,6 @@ namespace MVCLab2.Controllers
             var messageReply = new ReplyViewModel();
             messageReply.MessageID = id;
             messageReply.MessageReply = new Models.Reply();
-            messageReply.MessageReply.Body = "Test";
 
 
             return View(messageReply);
