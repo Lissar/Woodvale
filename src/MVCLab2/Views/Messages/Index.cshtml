@@ -12,7 +12,7 @@
         @:Topic: @m.Topic <br />
         @:@m.Body<br />
 
-        @Html.ActionLink("Reply", "ReplyToMessage", "Messages", new { Id = m.MessageID })<br />
+        @Html.ActionLink("Reply", "ReplyToMessage", "Messages", new { id = m.MessageID })<br />
 
         @foreach (var r in m.MessageReplies)
         {

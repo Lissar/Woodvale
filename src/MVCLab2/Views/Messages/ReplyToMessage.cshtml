@@ -1,5 +1,4 @@
-﻿﻿@model MVCLab2.Models.ReplyViewModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿﻿@model ReplyViewModel
 
 @{
     ViewBag.Title = "Reply to message";
@@ -8,8 +7,9 @@
 <h1>Write your message!</h1>
 
 <form asp-controller="Messages" asp-action="ReplyToMessage" method="post">
-
+    <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="MessageID" type="hidden" />
+
 
     <label asp-for="MessageReply.Body"></label>
     <input asp-for="MessageReply.Body" />

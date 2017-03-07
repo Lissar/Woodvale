@@ -1,5 +1,4 @@
-﻿﻿@model MVCLab2.Models.Message
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿﻿@model Message
 
 @{
     ViewBag.Title = "Add a new message";
@@ -8,7 +7,7 @@
 <h1>Write your message!</h1>
 
 <form asp-controller="Messages" asp-action="AddNewMessage" method="post">
-
+    <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="MessageID" type="hidden" />
 
     <label asp-for="Title"></label>

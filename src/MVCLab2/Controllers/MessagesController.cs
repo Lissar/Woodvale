@@ -41,44 +41,65 @@ namespace MVCLab2.Controllers
         [HttpGet]
         public ViewResult AddNewMessage()
         {
-            var newMessage = new Message();
-
-            return View(newMessage);
+            return View(new Message());
         }
 
         [HttpPost]
-        public IActionResult AddNewMessage(int id, string topic, string title, string body)
+        public IActionResult AddNewMessage(Message message)
         {
             Member member = new Member { UserName = "member4", DisplayName = "Tandy", Email = "tandy@woodvale.com" };
 
-            Message message = new Message { MessageID = id, Title = title, Body = body, Date = DateTime.Now, Topic = topic, User = member };
-            messageRepo.Update(message);
+            //Message message = new Message { MessageID = id, Title = title, Body = body, Date = DateTime.Now, Topic = topic, User = member };
+            message.User = member;
+            message.Date = DateTime.Now;
 
-            return RedirectToAction("Index", "Messages");
+            if (ModelState.IsValid)
+            {
+                messageRepo.Update(message);
+
+                return RedirectToAction("Index", "Messages");
+            }
+            else
+            {
+                return View(message);
+            }
+            
         }
 
         [HttpGet]
         public ViewResult ReplyToMessage(int id)
         {
-            var messageReply = new ReplyViewModel();
-            messageReply.MessageID = id;
-            messageReply.MessageReply = new Models.Reply();
+            var replyVm = new ReplyViewModel();
+            replyVm.MessageID = id;
+            replyVm.MessageReply = new Reply();
 
-
-            return View(messageReply);
+            return View(replyVm);
         }
 
         [HttpPost]
-        public IActionResult ReplyToMessage(ReplyViewModel messageReply)
+        public IActionResult ReplyToMessage(ReplyViewModel replyVm)
         {
-            Message message = (from m in messageRepo.GetAllMessages()
-                         where m.MessageID == messageReply.MessageID
-                         select m).FirstOrDefault<Message>();
 
-            message.MessageReplies.Add(messageReply.MessageReply);
-            messageRepo.Update(message);
+            if (replyVm.MessageReply.Body == "")
+            {
+               ModelState.AddModelError(nameof(replyVm.MessageReply.Body), "Please enter a reply");
+           }
 
-            return RedirectToAction("Index", "Messages");
+            if (ModelState.IsValid)
+            {
+                Message message = (from m in messageRepo.GetAllMessages()
+                                   where m.MessageID == replyVm.MessageID
+                                   select m).FirstOrDefault<Message>();
+
+                message.MessageReplies.Add(replyVm.MessageReply);
+                messageRepo.Update(message);
+
+                return RedirectToAction("Index", "Messages");
+            }
+            else
+            {
+                return View(replyVm);
+            }
         }
     }
 }

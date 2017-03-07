@@ -59,7 +59,8 @@ namespace MVCLab2.Migrations
                     b.Property<int>("ReplyID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Body");
+                    b.Property<string>("Body")
+                        .IsRequired();
 
                     b.Property<int?>("MessageID");
 
