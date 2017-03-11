@@ -13,6 +13,7 @@
 
     <label asp-for="MessageReply.Body"></label>
     <input asp-for="MessageReply.Body" />
+    <span asp-validation-for="MessageReply.Body" class="text-danger"></span><br />
 
     <button type="submit">Post</button>
 </form>

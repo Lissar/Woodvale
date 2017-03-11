@@ -47,6 +47,13 @@ namespace MVCLab2.Controllers
         [HttpPost]
         public IActionResult AddNewMessage(Message message)
         {
+            string body = message.Body;
+            if (string.IsNullOrEmpty(body) || body.IndexOf(" ", System.StringComparison.Ordinal) < 1)
+            {
+                string prop = "Body";
+                ModelState.AddModelError(prop, "Please enter at least two words");
+            }
+
             Member member = new Member { UserName = "member4", DisplayName = "Tandy", Email = "tandy@woodvale.com" };
 
             //Message message = new Message { MessageID = id, Title = title, Body = body, Date = DateTime.Now, Topic = topic, User = member };

@@ -22,7 +22,8 @@ namespace MVCLab2
         {
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json").Build();
+                .AddJsonFile("appsettings.json")
+                .Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -46,7 +47,17 @@ namespace MVCLab2
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
+            });
 
             app.Run(async (context) =>
             {

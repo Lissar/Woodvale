@@ -57,11 +57,13 @@
         "include": [
             "wwwroot",
             "web.config",
-            "**/*.cshtml"
+            "**/*.cshtml",
+            "appsettings.json"
         ]
     },
 
     "scripts": {
         "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
     }
+
 }
