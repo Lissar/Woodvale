@@ -12,14 +12,6 @@ namespace MVCLab2.Controllers
 {
     public class HomeController : Controller
     {
-        private IMemberRepository memberRepo;
-        // GET: /<controller>/
-
-        public HomeController(IMemberRepository repo)
-        {
-            memberRepo = repo;
-        }
-
         public ViewResult Index()
         {
             ViewBag.Date = DateTime.Now;
@@ -38,7 +30,7 @@ namespace MVCLab2.Controllers
 
         public ViewResult Members()
         {
-            return View(memberRepo.GetAllMembers().ToList());
+            return View();
         }
     }
 }

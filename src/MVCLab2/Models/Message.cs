@@ -15,7 +15,8 @@ namespace MVCLab2.Models
         [Required(ErrorMessage = "Please enter a comment")]
         public string Body { get; set; }
         public DateTime Date { get; set; }
-        public Member User { get; set; }
+        //public Member User { get; set; }
+        public User User { get; set; }
         [Required(ErrorMessage = "Please enter a topic")]
         public string Topic { get; set; }
         private List<Reply> replies = new List<Reply>();

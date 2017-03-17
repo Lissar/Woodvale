@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MVCLab2.Models.Repositories;
 using Microsoft.Extensions.Configuration;
 using MVCLab2.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MVCLab2
 {
@@ -31,9 +27,16 @@ namespace MVCLab2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration["ConnectionStrings:CommunityConnection"]));
-            
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration["ConnectionStrings:IdentityConnection"]));
+
+            services.AddIdentity<User, IdentityRole>(options =>
+            { options.Cookies.ApplicationCookie.LoginPath = "/Login/Login"; })
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
+
             services.AddTransient<IMessageRepository, MessageRepository>();
-            services.AddTransient<IMemberRepository, MemberRepository>();
 
             services.AddMvc();
         }
@@ -41,28 +44,19 @@ namespace MVCLab2
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseMvcWithDefaultRoute();
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseStatusCodePages();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
             }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
-            });
+            app.UseIdentity();
+            app.UseStatusCodePages();
+            app.UseDeveloperExceptionPage();
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
             SeedData.EnsurePopulated(app);
         }
     }

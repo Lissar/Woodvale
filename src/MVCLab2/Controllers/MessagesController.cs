@@ -54,7 +54,7 @@ namespace MVCLab2.Controllers
                 ModelState.AddModelError(prop, "Please enter at least two words");
             }
 
-            Member member = new Member { UserName = "member4", DisplayName = "Tandy", Email = "tandy@woodvale.com" };
+            User member = new User { UserName = "member4", DisplayName = "Tandy", Email = "tandy@woodvale.com" };
 
             //Message message = new Message { MessageID = id, Title = title, Body = body, Date = DateTime.Now, Topic = topic, User = member };
             message.User = member;
