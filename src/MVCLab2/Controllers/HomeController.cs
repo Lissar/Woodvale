@@ -14,8 +14,13 @@ namespace MVCLab2.Controllers
     {
         public ViewResult Index()
         {
-            ViewBag.Date = DateTime.Now;
-            return View();
+            var userVm = new UserViewModel { Authenticated = false };
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                userVm.UserName = HttpContext.User.Identity.Name;
+                userVm.Authenticated = true;
+            }
+            return View(userVm);
         }
 
         public ViewResult About()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace MVCLab2.Migrations
+namespace MVCLab2.Migrations.ApplicationDb
 {
     public partial class Initial : Migration
     {
@@ -47,7 +47,7 @@ namespace MVCLab2.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Topic = table.Column<string>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +57,7 @@ namespace MVCLab2.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

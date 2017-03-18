@@ -1,4 +1,16 @@
-﻿
+﻿@model UserViewModel
 @{
     ViewBag.Title = "Home";
+}
+
+@if (Model.Authenticated)
+{
+    <h3>Welcome @Model.UserName</h3>
+    <br />
+    <a asp-controller="Login" asp-action="Logout">Logout</a><br />
+}
+else
+{
+    <a asp-controller="Login" asp-action="Register">Register</a><br />
+    <a asp-controller="Login" asp-action="Login">Login</a><br />
 }

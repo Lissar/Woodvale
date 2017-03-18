@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using MVCLab2.Models.Repositories;
 using MVCLab2.Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,6 +14,7 @@ namespace MVCLab2.Controllers
     public class MessagesController : Controller
     {
         private IMessageRepository messageRepo;
+        private UserManager<User> userManager;
 
 
         public MessagesController(IMessageRepository repo)
@@ -39,13 +43,14 @@ namespace MVCLab2.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ViewResult AddNewMessage()
         {
             return View(new Message());
         }
 
         [HttpPost]
-        public IActionResult AddNewMessage(Message message)
+        public async Task<IActionResult> AddNewMessage(Message message)
         {
             string body = message.Body;
             if (string.IsNullOrEmpty(body) || body.IndexOf(" ", System.StringComparison.Ordinal) < 1)
@@ -54,10 +59,8 @@ namespace MVCLab2.Controllers
                 ModelState.AddModelError(prop, "Please enter at least two words");
             }
 
-            User member = new User { UserName = "member4", DisplayName = "Tandy", Email = "tandy@woodvale.com" };
-
-            //Message message = new Message { MessageID = id, Title = title, Body = body, Date = DateTime.Now, Topic = topic, User = member };
-            message.User = member;
+            string name = HttpContext.User.Identity.Name;
+            message.User = await userManager.FindByNameAsync(name);
             message.Date = DateTime.Now;
 
             if (ModelState.IsValid)
@@ -70,10 +73,11 @@ namespace MVCLab2.Controllers
             {
                 return View(message);
             }
-            
+
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ViewResult ReplyToMessage(int id)
         {
             var replyVm = new ReplyViewModel();
@@ -84,13 +88,13 @@ namespace MVCLab2.Controllers
         }
 
         [HttpPost]
-        public IActionResult ReplyToMessage(ReplyViewModel replyVm)
+        public async Task<IActionResult> ReplyToMessage(ReplyViewModel replyVm)
         {
 
             if (replyVm.MessageReply.Body == "")
             {
-               ModelState.AddModelError(nameof(replyVm.MessageReply.Body), "Please enter a reply");
-           }
+                ModelState.AddModelError(nameof(replyVm.MessageReply.Body), "Please enter a reply");
+            }
 
             if (ModelState.IsValid)
             {
@@ -99,6 +103,8 @@ namespace MVCLab2.Controllers
                                    select m).FirstOrDefault<Message>();
 
                 message.MessageReplies.Add(replyVm.MessageReply);
+                string name = HttpContext.User.Identity.Name;
+                message.User = await userManager.FindByNameAsync(name);
                 messageRepo.Update(message);
 
                 return RedirectToAction("Index", "Messages");

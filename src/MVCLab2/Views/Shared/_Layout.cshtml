@@ -11,14 +11,19 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-    <div>
-        <p>
-            @Html.ActionLink("Home", "Index", "Home") <br />
-            @Html.ActionLink("Forums", "Index", "Messages")<br />
-            @Html.ActionLink("Login", "Login", "Login")<br />
-            @Html.ActionLink("Register", "Register", "Login")<br />
-        </p>
-        @RenderBody()
-    </div>
+    <nav class="navbar navbar-static-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+
+               <li>@Html.ActionLink("Home", "Index", "Home")</li>
+               <li>@Html.ActionLink("Map", "Index", "Map")</li>
+               <li>@Html.ActionLink("News", "Index", "News")</li>
+               <li>@Html.ActionLink("Forums", "Index", "Messages")</li>           
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
+    <br />
+    <small>@Html.ActionLink("Admin", "Admin", "Login")</small>
 </body>
 </html>

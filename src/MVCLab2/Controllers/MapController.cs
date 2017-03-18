@@ -11,7 +11,7 @@ namespace MVCLab2.Controllers
     public class MapController : Controller
     {
         // GET: /<controller>/
-        public ViewResult Map()
+        public ViewResult Index()
         {
             return View();
         }

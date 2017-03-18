@@ -44,6 +44,7 @@ namespace MVCLab2.Controllers
 
                 if (result.Succeeded)
                 {
+                    await userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -87,6 +88,50 @@ namespace MVCLab2.Controllers
                     "Invalid user or password");
             }
             return View(vm);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Admin()
+        {
+            return View(new RegisterViewModel());
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Admin(RegisterViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User
+                {
+                    UserName = vm.UserName,
+                    Email = vm.Email
+                };
+                IdentityResult result = await userManager.CreateAsync(user, vm.Password);
+                
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+
+            return View(vm);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

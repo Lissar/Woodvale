@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using MVCLab2.Models;
 
-namespace MVCLab2.Migrations
+namespace MVCLab2.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170317030159_Initial")]
-    partial class Initial
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -33,7 +32,8 @@ namespace MVCLab2.Migrations
                     b.Property<string>("Topic")
                         .IsRequired();
 
-                    b.Property<int?>("UserId");
+                    b.Property<int?>("UserId")
+                        .IsRequired();
 
                     b.HasKey("MessageID");
 
@@ -105,7 +105,8 @@ namespace MVCLab2.Migrations
                 {
                     b.HasOne("MVCLab2.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MVCLab2.Models.Reply", b =>

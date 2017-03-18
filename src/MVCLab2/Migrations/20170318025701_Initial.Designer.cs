@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using MVCLab2.Models;
 
-namespace MVCLab2.Migrations.AppIdentityDb
+namespace MVCLab2.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20170315065005_NewIdentity")]
-    partial class NewIdentity
+    [Migration("20170318025701_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,6 +159,8 @@ namespace MVCLab2.Migrations.AppIdentityDb
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<int>("UserId");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);

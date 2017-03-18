@@ -16,6 +16,7 @@ namespace MVCLab2.Models
         public string Body { get; set; }
         public DateTime Date { get; set; }
         //public Member User { get; set; }
+        [Required]
         public User User { get; set; }
         [Required(ErrorMessage = "Please enter a topic")]
         public string Topic { get; set; }

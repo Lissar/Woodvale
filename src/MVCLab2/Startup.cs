@@ -36,9 +36,13 @@ namespace MVCLab2
             { options.Cookies.ApplicationCookie.LoginPath = "/Login/Login"; })
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
+            services.AddIdentity<User, IdentityRole>(options => options.Cookies.ApplicationCookie.AccessDeniedPath = "/Error/Error");
+
             services.AddTransient<IMessageRepository, MessageRepository>();
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,14 +53,13 @@ namespace MVCLab2
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
 
             app.UseIdentity();
-            app.UseStatusCodePages();
-            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
+            app.UseSession();
             SeedData.EnsurePopulated(app);
         }
     }
